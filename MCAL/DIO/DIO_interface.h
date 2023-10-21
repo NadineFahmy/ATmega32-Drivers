@@ -17,14 +17,14 @@ typedef enum
 
 
 
-// Port Defines
+// Port
 #define  DIO_PORTA  0
 #define  DIO_PORTB  1
 #define  DIO_PORTC  2
 #define  DIO_PORTD  3
 
 
-// PIN Defines
+// PIN
 #define DIO_PIN0   0
 #define DIO_PIN1   1
 #define DIO_PIN2   2
@@ -55,7 +55,7 @@ typedef enum
 #define PUD   2
 
 
-// IO Pins
+// Pins
 DIO_ErrorStatus DIO_enumSetPinDirection      (u8 Copy_u8PORT, u8 Copy_u8PIN, u8 Copy_u8Direction     );
 DIO_ErrorStatus DIO_enumSetPinValue          (u8 Copy_u8PORT, u8 Copy_u8PIN, u8 Copy_u8Value         );
 DIO_ErrorStatus DIO_enumGetPinValue          (u8 Copy_u8PORT, u8 Copy_u8PIN, u8 * Copy_PtrData       );  // return value as pointer
@@ -64,7 +64,7 @@ DIO_ErrorStatus DIO_enumTogglePinValue       (u8 Copy_u8PORT, u8 Copy_u8PIN     
 // Internal Pull Up
 DIO_ErrorStatus DIO_enumConnectPullup        (u8 Copy_u8PORT ,u8 Copy_u8PIN, u8 Copy_u8ConnectPullup );
 
-// IO Ports
+// Ports
 DIO_ErrorStatus DIO_enumSetPortDirection     (u8 Copy_u8PORT, u8 Copy_u8Direction  );
 DIO_ErrorStatus DIO_enumSetPortValue         (u8 Copy_u8PORT, u8 Copy_u8Value      );
 DIO_ErrorStatus DIO_enumGetPortValue         (u8 Copy_u8PORT, u8 * Copy_PtrData    );
