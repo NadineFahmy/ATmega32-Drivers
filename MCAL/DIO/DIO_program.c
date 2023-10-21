@@ -265,3 +265,162 @@ DIO_ErrorStatus   DIO_enumGetPortValue         ( u8 Copy_u8PORT  , u8 * Copy_Ptr
 
 	return LOC_enumState ;
 }
+
+
+DIO_ErrorStatus DIO_voidWriteHighNibbles(u8 Copy_u8PORT,u8 Copy_u8value)
+{
+
+	DIO_ErrorStatus LOC_enumState = DIO_OK ;
+
+	if ( (Copy_u8PORT <= DIO_PORTD))
+	{
+		Copy_u8value = (Copy_u8value<<4) ;
+		switch(Copy_u8PORT)
+		{
+		case DIO_PORTA :
+			PORTA_Register&=0x0f;                   // make sure the high bits = 0000
+			PORTA_Register|=Copy_u8value;			//Set only the high nibble of the port A by the given value
+			break ;
+		case DIO_PORTB:
+			PORTB_Register&=0x0f;                 //Set only the high nibble of the port B by the given value
+			PORTB_Register|=Copy_u8value;
+			break ;
+		case DIO_PORTC :
+			PORTC_Register&=0x0f;                 //Set only the high nibble of the port C by the given value
+			PORTC_Register|=Copy_u8value;
+			break ;
+		case DIO_PORTD:
+			PORTD_Register&=0x0f;                 //Set only the high nibble of the port D by the given value
+			PORTD_Register|=Copy_u8value;
+			break ;
+		default: break ;
+
+		}
+	}
+	else
+	{
+		LOC_enumState = DIO_NOK;
+	}
+
+	return LOC_enumState ;
+
+}
+
+
+
+DIO_ErrorStatus DIO_voidWriteLowNibbles(u8 Copy_u8PORT,u8 Copy_u8value)
+{
+	DIO_ErrorStatus LOC_enumState = DIO_OK ;
+
+
+	if ( (Copy_u8PORT <= DIO_PORTD))
+	{
+		Copy_u8value&=0x0f;
+		switch(Copy_u8PORT)
+		{
+		case DIO_PORTA :
+			PORTA_Register &= 0xf0;                 //Set only the high nibble of the port A by the given value
+			PORTA_Register |= Copy_u8value;
+			break ;
+		case DIO_PORTB:
+			PORTB_Register &= 0xf0;                 //Set only the high nibble of the port B by the given value
+			PORTB_Register |= Copy_u8value;
+			break ;
+		case DIO_PORTC :
+			PORTC_Register &= 0xf0;                 //Set only the high nibble of the port C by the given value
+			PORTC_Register |= Copy_u8value;
+			break ;
+		case DIO_PORTD:
+			PORTD_Register &= 0xf0;                 //Set only the high nibble of the port D by the given value
+			PORTD_Register |= Copy_u8value;
+			break ;
+		default: break ;
+
+		}
+
+
+	}
+	else
+	{
+		LOC_enumState = DIO_NOK;
+	}
+
+	return LOC_enumState ;
+
+}
+
+
+
+DIO_ErrorStatus DIO_enumConnectPullup (u8 Copy_u8PORT ,u8 Copy_u8PIN, u8 Copy_u8ConnectPullup)
+{
+
+	DIO_ErrorStatus LOC_enumState = DIO_OK ;
+
+	if ((Copy_u8PORT <= DIO_PORTD) && (Copy_u8PIN <= DIO_PIN7))
+	{
+		switch(Copy_u8PORT)
+		{
+		/* Connect or disconnect the pull up resistance to the given pin in port A */
+		case DIO_PORTA:
+			if(Copy_u8ConnectPullup==DIO_PIN_HIGH)
+			{
+				CLR_BIT(SFIOR,PUD);
+				CLR_BIT(DDRA_Register,Copy_u8PIN);
+				SET_BIT(PORTA_Register,Copy_u8PIN);
+			}
+			else
+			{
+				CLR_BIT(PORTA_Register,Copy_u8PIN);
+			}
+			break;
+			/* Connect or disconnect the pull up resistance to the given pin in port B */
+		case DIO_PORTB:
+			if(Copy_u8ConnectPullup==DIO_PIN_HIGH)
+			{
+				CLR_BIT(SFIOR,PUD);
+				CLR_BIT(DDRB_Register,Copy_u8PIN);
+				SET_BIT(PORTB_Register,Copy_u8PIN);
+			}
+			else
+			{
+				CLR_BIT(PORTB_Register,Copy_u8PIN);
+			}
+			break;
+			/* Connect or disconnect the pull up resistance to the given pin in port C */
+		case DIO_PORTC:
+			if(Copy_u8ConnectPullup==DIO_PIN_HIGH)
+			{
+				CLR_BIT(SFIOR,PUD);
+				CLR_BIT(DDRC_Register,Copy_u8PIN);
+				SET_BIT(PORTC_Register,Copy_u8PIN);
+			}
+			else
+			{
+				CLR_BIT(PORTC_Register,Copy_u8PIN);
+			}
+			break;
+			/* Connect or disconnect the pull up resistance to the given pin in port D */
+		case DIO_PORTD:
+			if(Copy_u8ConnectPullup==DIO_PIN_HIGH)
+			{
+				CLR_BIT(SFIOR,PUD);
+				CLR_BIT(DDRD_Register,Copy_u8PIN);
+				SET_BIT(PORTD_Register,Copy_u8PIN);
+			}
+			else
+			{
+				CLR_BIT(PORTD_Register,Copy_u8PIN);
+			}
+			break;
+		}
+	}
+
+	else
+	{
+		LOC_enumState = DIO_NOK ;
+	}
+
+	return LOC_enumState ;
+
+
+}
