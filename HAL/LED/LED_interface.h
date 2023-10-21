@@ -9,14 +9,14 @@
 #define LED_INTERFACE_H_
 
 
-// Port Defines
+// Port
 #define  LED_PORTA  0
 #define  LED_PORTB  1
 #define  LED_PORTC  2
 #define  LED_PORTD  3
 
 
-// PIN Defines
+// PIN
 #define LED_PIN0   0
 #define LED_PIN1   1
 #define LED_PIN2   2
